@@ -1,8 +1,8 @@
-###########################################################################################################################################################
+﻿###########################################################################################################################################################
 # Created By: Cyberhill Partners, LLC.
 # https://cyberhillpartners.com
-# Date: 8/17/2020
-# Description: Run Active Directory Sync
+# Date: 10/15/2020
+# Description: Sync Active Directory with Secret Server
 ###########################################################################################################################################################
 
 Function Sync-SSActiveDirectory {
@@ -29,7 +29,7 @@ Function Sync-SSActiveDirectory {
         $reader.BaseStream.Position = 0;
         $reader.DiscardBufferedData();
         $responseBody = $reader.ReadToEnd() | ConvertFrom-Json
-        Write-Host "ERROR: ($responseBody.error)"
+        Write-Host "ERROR: $($responseBody.error)"
         return;
     }
 }
