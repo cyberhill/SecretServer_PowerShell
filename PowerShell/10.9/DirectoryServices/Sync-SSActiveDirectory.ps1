@@ -2,7 +2,7 @@
 # Created By: Cyberhill Partners, LLC.
 # https://cyberhillpartners.com
 # Date: 10/15/2020
-# Description: Sync Active Directory with Secret Server
+# Description: Run an Active Directory Sync
 ###########################################################################################################################################################
 
 Function Sync-SSActiveDirectory {
@@ -18,9 +18,10 @@ Function Sync-SSActiveDirectory {
     {
     $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
     $headers.Add("Authorization", "Bearer $APIKey")
+    
 
-    $ADSync = Invoke-RestMethod "$URI/api/v1/active-directory/synchronize" -Method Post -Headers $headers
-    return $ADSync
+    $diagnostics = Invoke-RestMethod "$URI/api/v1/directory-services/synchronization-now" -Method Post -Headers $headers
+    return $diagnostics
     }
     catch
     {
@@ -29,7 +30,7 @@ Function Sync-SSActiveDirectory {
         $reader.BaseStream.Position = 0;
         $reader.DiscardBufferedData();
         $responseBody = $reader.ReadToEnd() | ConvertFrom-Json
-        Write-Host "ERROR: $($responseBody.error)"
+        Write-Host "ERROR: ($responseBody.error)"
         return;
     }
 }
