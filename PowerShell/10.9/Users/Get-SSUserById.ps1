@@ -23,7 +23,6 @@ Function Get-SSUserById {
     $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
     $headers.Add("Authorization", "Bearer $APIKey")
     $URI = "$URI/api/v1/users/$UserID" + "?" + "includeInactive=$includeInactive"
-    Write-Host $URI
     
     $secrets = Invoke-RestMethod $URI -Method Get -Headers $headers
     return $secrets
