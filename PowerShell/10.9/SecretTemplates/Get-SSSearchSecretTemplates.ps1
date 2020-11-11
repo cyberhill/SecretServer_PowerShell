@@ -40,7 +40,7 @@ Function Get-SSSearchSecretTemplates {
         $URI = "$URI&filter.includeInactive=$includeInactive"
     } 
 
-    If ($ParentFolderId) {
+    If ($includeSecretCount) {
         $URI = "$URI&filter.includeSecretCount=$includeSecretCount"
     }
 
