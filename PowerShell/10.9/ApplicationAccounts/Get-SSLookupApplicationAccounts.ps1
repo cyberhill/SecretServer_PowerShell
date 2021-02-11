@@ -1,8 +1,8 @@
 ﻿###########################################################################################################################################################
 # Created By: Cyberhill Partners, LLC.
 # https://cyberhillpartners.com
-# Date: 10/30/2020
-# Description: Lookup Application Account users
+# Date: 2/10/2021
+# Description: Lookup Application Accounts
 ###########################################################################################################################################################
 
 Function Get-SSLookupApplicationAccounts {
@@ -13,18 +13,18 @@ Function Get-SSLookupApplicationAccounts {
          [Parameter(Mandatory=$true, Position=1)]
          [string] $APIKey,
          [Parameter(Mandatory=$False, Position=2)]
-         [boolean] $IncludeAll,
+         [boolean] $includeAll,
          [Parameter(Mandatory=$False, Position=3)]
          [string] $SearchText,
          [Parameter(Mandatory=$False, Position=4)]
          [int] $Skip,
-         [Parameter(Mandatory=$False, Position=5)]
+         [Parameter(Mandatory=$False, Position=25)]
          [string] $SortDirection,
-         [Parameter(Mandatory=$False, Position=6)]
+         [Parameter(Mandatory=$False, Position=26)]
          [string] $SortField,
-         [Parameter(Mandatory=$False, Position=7)]
+         [Parameter(Mandatory=$False, Position=27)]
          [int] $SortPriority,
-         [Parameter(Mandatory=$False, Position=8)]
+         [Parameter(Mandatory=$False, Position=28)]
          [int] $Take = 10
     )
 
@@ -34,32 +34,32 @@ Function Get-SSLookupApplicationAccounts {
     $headers.Add("Authorization", "Bearer $APIKey")
     $URI = "$URI/api/v1/application-accounts/lookup?take=$take"
     
-    If ($IncludeAll) {
-        $URI = "$URI&filter.includeAll=$IncludeAll"
-    } 
+    If ($includeAll) {
+        $URI = "$URI&filter.includeAll=$includeAll"
+    }
 
-   If ($SearchText) {
+    If ($SearchText) {
         $URI = "$URI&filter.searchText=$SearchText"
     }
 
-    If ($skip) {
-        $URI = "$URI&skip=$skip"
+    If ($Skip) {
+        $URI = "$URI&skip=$Skip"
     }
 
     If ($SortDirection) {
-        $URI = "$URI&sortBy[n].direction=$SortDirection"
+        $URI = "$URI&sortBy[0].direction=$SortDirection"
     }
 
     If ($SortField) {
-        $URI = "$URI&sortBy[n].name=$SortField"
+        $URI = "$URI&sortBy[0].name=$SortField"
     }
-    
+
     If ($SortPriority) {
         $URI = "$URI&sortBy[0].priority=$SortPriority"
     }
-
-    $folders = Invoke-RestMethod $URI -Method Get -Headers $headers
-    return $folders
+    
+    $ApplicationAccounts = Invoke-RestMethod $URI -Method Get -Headers $headers
+    return $ApplicationAccounts
     }
     catch
     {
