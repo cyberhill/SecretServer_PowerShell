@@ -18,13 +18,13 @@ Function Get-SSLookupApplicationAccounts {
          [string] $SearchText,
          [Parameter(Mandatory=$False, Position=4)]
          [int] $Skip,
-         [Parameter(Mandatory=$False, Position=25)]
+         [Parameter(Mandatory=$False, Position=5)]
          [string] $SortDirection,
-         [Parameter(Mandatory=$False, Position=26)]
+         [Parameter(Mandatory=$False, Position=6)]
          [string] $SortField,
-         [Parameter(Mandatory=$False, Position=27)]
+         [Parameter(Mandatory=$False, Position=7)]
          [int] $SortPriority,
-         [Parameter(Mandatory=$False, Position=28)]
+         [Parameter(Mandatory=$False, Position=8)]
          [int] $Take = 10
     )
 
